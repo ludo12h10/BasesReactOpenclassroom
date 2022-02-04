@@ -1,28 +1,32 @@
 import {plantList} from "../datas/plantList";
 import '../style/ShoppingList.css';
+import PlantItem from "./PlantItem";
 
 function ShoppingList() {
-    const plants = [];
+    const cat = [];
     plantList.forEach((p, index) => {
-        plants.push(p);
+        cat.push(p.category);
     });
-
+    const categories = Array.from(new Set(cat));
 
     return (
         <div>
             <ul>
-                {plants.map((plant, index) => (
-                    <li key={plant.id}>
-                        {plant.category}
+                {categories.map((c) => (
+                    <li key={c}>
+                        {c}
                     </li>
                 ))}
             </ul>
-            <ul  className={'lmj-plant-list'}>
-                {plants.map((plant) => (
-                    <li key={plant.id} className={'lmj-plant-item'}>
-                        {plant.name}
-                        {plant.isSpecialOffer ? <div className={'lmj-sales'}>Soldes</div> : null}
-                    </li>
+            <ul className={'lmj-plant-list'}>
+                {plantList.map(({id, cover, name, water, light}) => (
+                    <PlantItem
+                        id={id}
+                        cover={cover}
+                        name={name}
+                        water={water}
+                        light={light}
+                    />
                 ))}
             </ul>
         </div>
