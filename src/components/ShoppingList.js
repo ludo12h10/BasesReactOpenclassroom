@@ -3,11 +3,11 @@ import PlantItem from './PlantItem'
 import '../style/ShoppingList.css'
 
 function ShoppingList({ cart, updateCart }) {
-    const categories = plantList.reduce(
-        (acc, plant) =>
-            acc.includes(plant.category) ? acc : acc.concat(plant.category),
-        []
-    )
+    const cat = [];
+    plantList.forEach((p) => {
+        cat.push(p.category);
+    });
+    const categories = Array.from(new Set(cat));
 
     function addToCart(name, price) {
         const currentPlantSaved = cart.find((plant) => plant.name === name)
